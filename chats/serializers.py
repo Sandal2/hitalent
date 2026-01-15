@@ -12,7 +12,7 @@ class ChatCreateSerializer(serializers.ModelSerializer):
 
 
 class MessageCreateSerializer(serializers.ModelSerializer):
-    text = serializers.CharField(max_length=5000, allow_blank=False, trim_whitespace=True)
+    text = serializers.CharField(max_length=5000, allow_blank=False)
 
     class Meta:
         model = Message
@@ -26,8 +26,14 @@ class MessageReadSerializer(serializers.ModelSerializer):
 
 
 class ChatDetailSerializer(serializers.ModelSerializer):
-    messages = MessageReadSerializer(many=True, read_only=True)
+    messages = serializers.SerializerMethodField()
 
     class Meta:
         model = Chat
         fields = ['id', 'title', 'messages', 'created_at']
+
+    def get_messages(self, obj):
+        limit = self.context['limit', 20]
+        qs = obj.messages.order_by('created_at')[:limit]
+
+        return MessageReadSerializer(qs, many=True).data

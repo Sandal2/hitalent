@@ -19,4 +19,4 @@ class Message(models.Model):
         return f'Message ID: {self.pk} | Message Text: {self.text[:20]}'
 
     class Meta:
-        ordering = ['-created_at']
+        ordering = ['created_at']

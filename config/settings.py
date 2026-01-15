@@ -132,6 +132,7 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
     ],
     'DEFAULT_PARSER_CLASSES': [
         'rest_framework.parsers.JSONParser',
@@ -158,7 +159,7 @@ LOGGING = {
             'level': 'INFO',
             'class': 'logging.handlers.RotatingFileHandler',
             'filename': BASE_DIR / 'debug.log',
-            'maxBytes': 1024*1024*5,
+            'maxBytes': 1024 * 1024 * 5,
             'backupCount': 3,
             'formatter': 'verbose',
         },
