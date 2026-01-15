@@ -1,0 +1,33 @@
+from rest_framework import serializers
+
+from chats.models import Chat, Message
+
+
+class ChatCreateSerializer(serializers.ModelSerializer):
+    title = serializers.CharField(max_length=200, allow_blank=False, trim_whitespace=True)
+
+    class Meta:
+        model = Chat
+        fields = ['title']
+
+
+class MessageCreateSerializer(serializers.ModelSerializer):
+    text = serializers.CharField(max_length=5000, allow_blank=False, trim_whitespace=True)
+
+    class Meta:
+        model = Message
+        fields = ['text']
+
+
+class MessageReadSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Message
+        fields = ['id', 'text', 'created_at']
+
+
+class ChatDetailSerializer(serializers.ModelSerializer):
+    messages = MessageReadSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Chat
+        fields = ['id', 'title', 'messages', 'created_at']
