@@ -81,5 +81,3 @@ docker-compose up --build
 ## Примечания
 
 * Скрипт `wait-for-it.sh` ждёт готовность PostgreSQL перед запуском Django.
-
-```
