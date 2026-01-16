@@ -33,7 +33,7 @@ class ChatDetailSerializer(serializers.ModelSerializer):
         fields = ['id', 'title', 'messages', 'created_at']
 
     def get_messages(self, obj):
-        limit = self.context['limit', 20]
-        qs = obj.messages.order_by('created_at')[:limit]
+        limit = self.context.get('limit', 20)
+        qs = obj.messages.order_by('-created_at')[:limit]
 
         return MessageReadSerializer(qs, many=True).data

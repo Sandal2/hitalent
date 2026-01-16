@@ -1,8 +1,7 @@
-from django.db.models import Prefetch
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import get_object_or_404
 from rest_framework import generics
 
-from chats.models import Chat, Message
+from chats.models import Chat
 from chats.serializers import ChatCreateSerializer, MessageCreateSerializer, ChatDetailSerializer
 
 
